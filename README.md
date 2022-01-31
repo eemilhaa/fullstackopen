@@ -1,2 +1,2 @@
 # fullstackopen
-fulstackopen 2022
+fullstackopen 2022
