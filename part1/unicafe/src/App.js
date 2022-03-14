@@ -20,6 +20,14 @@ const StatisticLine = ({ stat, text }) => (
 )
 
 const Statistics = ({ good, neutral, bad, total, sum, positives }) => {
+  if (total === 0) {
+    return (
+      <div>
+        <Header content="statistics" />
+        No feedback given
+      </div>
+    )
+  }
   return (
     <div>
       <Header content="statistics" />
