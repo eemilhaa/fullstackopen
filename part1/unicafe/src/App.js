@@ -13,11 +13,25 @@ const Header = ({ content }) => (
   </div>
 )
 // Component for displaying stats
-const DisplayStat = ({ stat, text }) => (
+const StatisticLine = ({ stat, text }) => (
   <div>
     <p>{text} {stat}</p>
   </div>
 )
+
+const Statistics = ({ good, neutral, bad, total, sum, positives }) => {
+  return (
+    <div>
+      <Header content="statistics" />
+      <StatisticLine stat={good} text="good" />
+      <StatisticLine stat={neutral} text="neutral" />
+      <StatisticLine stat={bad} text="bad" />
+      <StatisticLine stat={total} text="total" />
+      <StatisticLine stat={sum / total} text="average" />
+      <StatisticLine stat={positives / total} text="positive (%)" />
+    </div>
+  )
+}
 
 const App = () => {
   // save clicks of each button to its own state
@@ -51,13 +65,14 @@ const App = () => {
       <Button handleClick={addGood} text="good" />
       <Button handleClick={addNeutral} text="neutral" />
       <Button handleClick={addBad} text="bad" />
-      <Header content="statistics" />
-      <DisplayStat stat={good} text="good" />
-      <DisplayStat stat={neutral} text="neutral" />
-      <DisplayStat stat={bad} text="bad" />
-      <DisplayStat stat={total} text="total" />
-      <DisplayStat stat={sum / total} text="average" />
-      <DisplayStat stat={positives / total} text="positive (%)" />
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={total}
+        sum={sum}
+        positives={positives}
+      />
     </div>
   )
 }
