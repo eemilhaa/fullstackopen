@@ -6,12 +6,14 @@ const Button = ({ handleClick, text }) => (
     {text}
   </button>
 )
+
 // Component for headers
 const Header = ({ content }) => (
   <div>
     <h1>{content}</h1>
   </div>
 )
+
 // Component for displaying stats
 const StatisticLine = ({ stat, text }) => (
   <div>
@@ -19,6 +21,7 @@ const StatisticLine = ({ stat, text }) => (
   </div>
 )
 
+// Statistics using separate lines
 const Statistics = ({ good, neutral, bad, total, sum, positives }) => {
   if (total === 0) {
     return (
@@ -37,6 +40,51 @@ const Statistics = ({ good, neutral, bad, total, sum, positives }) => {
       <StatisticLine stat={total} text="total" />
       <StatisticLine stat={sum / total} text="average" />
       <StatisticLine stat={positives / total} text="positive (%)" />
+    </div>
+  )
+}
+
+// Statistics as a single html table
+const StatisticsTable = ({ good, neutral, bad, total, sum, positives }) => {
+  if (total === 0) {
+    return (
+      <div>
+        <Header content="statistics" />
+        No feedback given
+      </div>
+    )
+  }
+  return (
+    <div>
+      <Header content="statistics" />
+      <table>
+        <tbody>
+          <tr>
+            <td>good</td>
+            <td>{good}</td>
+          </tr>
+          <tr>
+            <td>neutral</td>
+            <td>{neutral}</td>
+          </tr>
+          <tr>
+            <td>bad</td>
+            <td>{bad}</td>
+          </tr>
+          <tr>
+            <td>total</td>
+            <td>{total}</td>
+          </tr>
+          <tr>
+            <td>average</td>
+            <td>{sum / total}</td>
+          </tr>
+          <tr>
+            <td>positive</td>
+            <td>{positives}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -73,7 +121,7 @@ const App = () => {
       <Button handleClick={addGood} text="good" />
       <Button handleClick={addNeutral} text="neutral" />
       <Button handleClick={addBad} text="bad" />
-      <Statistics
+      <StatisticsTable
         good={good}
         neutral={neutral}
         bad={bad}
