@@ -1,6 +1,17 @@
 const Header = ({ name }) => <h1>{name}</h1>
 
-const Total = ({ sum }) => <p>Number of exercises {sum}</p>
+const Total = ({ parts }) => {
+  const initialValue = 0
+  const sum = parts.reduce(
+    (accumulator, part) => accumulator + part.exercises,
+    initialValue
+  )
+  return (
+    <p>
+      <b>Total of {sum} exercises</b>
+    </p>
+  )
+}
 
 const Part = ({ part }) => 
   <p>
@@ -19,6 +30,7 @@ const Course = ({ course }) => {
     <div>
       <Header name={course.name} />
       <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
@@ -30,27 +42,27 @@ const App = () => {
     parts: [
       {
         name: 'Fundamentals of React',
-        exercises: 10,
+        exercises: 2,
         id: 1
       },
       {
         name: 'Using props to pass data',
-        exercises: 7,
+        exercises: 1,
         id: 2
       },
       {
         name: 'State of a component',
-        exercises: 14,
+        exercises: 3,
         id: 3
       },
       {
         name: 'The longest part ever',
-        exercises: 999,
+        exercises: 4,
         id: 4
       },
       {
         name: 'Fundamentals of React again',
-        exercises: 10,
+        exercises: 5,
         id: 5
       },
     ]
