@@ -3,7 +3,7 @@ import { useState } from "react";
 const Person = ({ person }) => {
   return (
     <li>
-      {person.name} - {person.number}
+      {person.name}  {person.number}
     </li>
   );
 };
@@ -40,12 +40,24 @@ const AdditionForm = ({
   );
 };
 
+const Search = ({ handleSearch }) => {
+  return (
+    <div>
+      search: <input onChange={handleSearch} />
+    </div>
+  );
+};
+
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: 113 },
+    { name: "Arto Hellas", number: "040-123456" },
+    { name: "Ada Lovelace", number: "39-44-5323523" },
+    { name: "Dan Abramov", number: "12-43-234345" },
+    { name: "Mary Poppendieck", number: "39-23-6423122" },
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [search, setSearch] = useState("");
 
   const addPerson = (event) => {
     event.preventDefault();
@@ -61,14 +73,26 @@ const App = () => {
     setNewName("");
     setNewNumber("");
   };
+
   const handleNameChange = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
   };
   const handleNumberChange = (event) => {
-    console.log(event.target.value);
     setNewNumber(event.target.value);
   };
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const getPersonsToShow = () => {
+    if (search.length > 0) {
+      return persons.filter((person) =>
+        person.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    return persons;
+  };
+  const personsToShow = getPersonsToShow();
 
   return (
     <div>
@@ -81,7 +105,8 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} />
+      <Search handleSearch={handleSearch} />
+      <Persons persons={personsToShow} />
     </div>
   );
 };
