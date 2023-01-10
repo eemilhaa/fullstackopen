@@ -4,6 +4,31 @@ const Person = ({ person }) => {
   return <li>{person.name}</li>;
 };
 
+const Persons = ({ persons }) => {
+  return (
+    <div>
+      <ul>
+        {persons.map((person) => (
+          <Person key={person.name} person={person} />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+const Form = ({ addName, newName, handleNameChange }) => {
+  return (
+    <form onSubmit={addName}>
+      <div>
+        name: <input value={newName} onChange={handleNameChange} />
+      </div>
+      <div>
+        <button type="submit">add</button>
+      </div>
+    </form>
+  );
+};
+
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
   const [newName, setNewName] = useState("");
@@ -23,28 +48,18 @@ const App = () => {
   const handleNameChange = (event) => {
     console.log(event.target.value);
     setNewName(event.target.value);
-    console.log(persons);
   };
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <Form
+        addName={addName}
+        newName={newName}
+        handleNameChange={handleNameChange}
+      />
       <h2>Numbers</h2>
-      <div>
-        <ul>
-          {persons.map((person) => (
-            <Person key={person.name} person={person} />
-          ))}
-        </ul>
-      </div>
+      <Persons persons={persons} />
     </div>
   );
 };
