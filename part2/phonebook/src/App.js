@@ -57,7 +57,13 @@ const App = () => {
   const personsToShow = getPersonsToShow();
 
   const deletePerson = (id) => {
-    console.log(`delete ${id}`)
+    const personToDelete = persons.find(
+      (person) => person.id === id
+    )
+    if (window.confirm(`delete ${personToDelete.name}?`)) {
+      personService.remove(id)
+      setPersons(persons.filter((person) => person.id !== id))
+    }
   }
   return (
     <div>
