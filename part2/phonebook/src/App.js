@@ -1,53 +1,9 @@
 import { useState, useEffect } from "react";
 import personService from "./services/persons"
+import AdditionForm from "./components/AdditionForm"
+import Persons from "./components/Persons"
+import Search from "./components/Search"
 
-const Person = ({ person }) => {
-  return (
-    <li>
-      {person.name}  {person.number}
-    </li>
-  );
-};
-
-const Persons = ({ persons }) => {
-  return (
-    <ul>
-      {persons.map((person) => (
-        <Person key={person.name} person={person} />
-      ))}
-    </ul>
-  );
-};
-
-const AdditionForm = ({
-  addPerson,
-  newName,
-  handleNameChange,
-  newNumber,
-  handleNumberChange,
-}) => {
-  return (
-    <form onSubmit={addPerson}>
-      <div>
-        name: <input value={newName} onChange={handleNameChange} />
-      </div>
-      <div>
-        number: <input value={newNumber} onChange={handleNumberChange} />
-      </div>
-      <div>
-        <button type="submit">add</button>
-      </div>
-    </form>
-  );
-};
-
-const Search = ({ handleSearch }) => {
-  return (
-    <div>
-      search: <input onChange={handleSearch} />
-    </div>
-  );
-};
 
 const App = () => {
   const [persons, setPersons] = useState([]);
