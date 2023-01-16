@@ -56,6 +56,9 @@ const App = () => {
   };
   const personsToShow = getPersonsToShow();
 
+  const deletePerson = (id) => {
+    console.log(`delete ${id}`)
+  }
   return (
     <div>
       <h2>Phonebook</h2>
@@ -68,7 +71,7 @@ const App = () => {
       />
       <h2>Numbers</h2>
       <Search handleSearch={handleSearch} />
-      <Persons persons={personsToShow} />
+      <Persons persons={personsToShow} deletePerson={deletePerson} />
     </div>
   );
 };
