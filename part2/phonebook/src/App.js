@@ -3,13 +3,15 @@ import personService from "./services/persons"
 import AdditionForm from "./components/AdditionForm"
 import Persons from "./components/Persons"
 import Search from "./components/Search"
-
+import Notification from "./components/Notification"
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [search, setSearch] = useState("");
+  const [notification, setNotification] = useState(null)
+  const [success, setSuccess] = useState(true)
 
   useEffect(() => {
     personService
@@ -18,6 +20,14 @@ const App = () => {
         setPersons(initialPersons)
       })
   }, [])
+
+  const makeNotification = (message, success) => {
+    setNotification(message)
+    setSuccess(success)
+    setTimeout(() => {
+      setNotification(null)
+    }, 2000)
+  }
 
   const addPerson = (event) => {
     event.preventDefault();
@@ -29,13 +39,18 @@ const App = () => {
       (person) => person.name === newName
     )
     if (personToUpdate) {
-      alert(`${newName} is already added to phonebook, replace the old number with a new one?`);
-      personService
-        .update(personToUpdate.id, personObject)
-        .then(returnedPerson => {
-          setPersons(persons.map(
-            person => person.id === returnedPerson.id ? returnedPerson : person))
-        })
+      const confirmation = window.confirm(
+        `${newName} is already added to phonebook, replace the old number with a new one?`
+      )
+      if (confirmation) {
+        personService
+          .update(personToUpdate.id, personObject)
+          .then(returnedPerson => {
+            setPersons(persons.map(
+              person => person.id === returnedPerson.id ? returnedPerson : person))
+          })
+        makeNotification(`number for ${personToUpdate.name} updated`, true)
+      }
       return;
     }
     personService
@@ -43,6 +58,7 @@ const App = () => {
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
       })
+    makeNotification(`${newName} added`, true)
   }
 
   const handleNameChange = (event) => {
@@ -77,6 +93,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification} status={success}/>
       <AdditionForm
         addPerson={addPerson}
         newName={newName}
