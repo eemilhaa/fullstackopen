@@ -20,4 +20,4 @@ const AdditionForm = ({
   );
 };
 
-export default AdditionForm
+export default AdditionForm;

@@ -7,15 +7,11 @@ const Notification = ({ message, success }) => {
     background: "lightgrey",
     borderRadius: "0.5em",
     marginBottom: "1em",
-  }
+  };
   if (message === null) {
-    return null
+    return null;
   }
-  return (
-    <div style={notificationStyle}>
-      {message}
-    </div>
-  )
-}
+  return <div style={notificationStyle}>{message}</div>;
+};
 
-export default Notification
+export default Notification;
