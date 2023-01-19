@@ -1,10 +1,12 @@
-const Notification = ({ message, success}) => {
-  const color = success === true ? "green" : "red"
+const Notification = ({ message, success }) => {
   const notificationStyle = {
-    color: color,
+    color: success === true ? "green" : "red",
     fontFamily: "monospace",
     fontSize: 16,
-    paddingBottom: "1em",
+    padding: "1em",
+    background: "lightgrey",
+    borderRadius: "0.5em",
+    marginBottom: "1em",
   }
   if (message === null) {
     return null

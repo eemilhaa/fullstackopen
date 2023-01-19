@@ -21,9 +21,10 @@ const App = () => {
       })
   }, [])
 
-  const makeNotification = (message, success) => {
+  const notify = (message, success) => {
     setNotification(message)
     setSuccess(success)
+    console.log(success)
     setTimeout(() => {
       setNotification(null)
     }, 2000)
@@ -49,7 +50,7 @@ const App = () => {
             setPersons(persons.map(
               person => person.id === returnedPerson.id ? returnedPerson : person))
           })
-        makeNotification(`number for ${personToUpdate.name} updated`, true)
+        notify(`number for ${personToUpdate.name} updated`, true)
       }
       return;
     }
@@ -58,7 +59,7 @@ const App = () => {
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
       })
-    makeNotification(`${newName} added`, true)
+    notify(`${newName} added`, true)
   }
 
   const handleNameChange = (event) => {
@@ -88,12 +89,13 @@ const App = () => {
     if (window.confirm(`delete ${personToDelete.name}?`)) {
       personService.remove(id)
       setPersons(persons.filter((person) => person.id !== id))
+      notify(`${personToDelete.name} deleted`, true)
     }
   }
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={notification} status={success}/>
+      <Notification message={notification} success={success}/>
       <AdditionForm
         addPerson={addPerson}
         newName={newName}
