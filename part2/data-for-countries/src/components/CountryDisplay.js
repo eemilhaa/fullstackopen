@@ -1,7 +1,7 @@
-const CountryName = ({ country }) => {
+const ListItem = ({ item }) => {
   return (
     <li>
-      {country.name.common} 
+      {item} 
     </li>
   )
 }
@@ -10,10 +10,19 @@ const CountryInfo = ({ country }) => {
   return (
     <div>
       <h1> {country.name.common} </h1>
-      Capital: {country.capital}
-      Area: {country.area}
-      Population: {country.population}
-
+      <div>
+        Capital: {country.capital} <br/>
+        Area: {country.area} <br/>
+        Population: {country.population} <br/>
+      </div>
+      <div>
+        <h3>Languages:</h3>
+        <ul>
+          {Object.values(country.languages).map(language =>
+            <ListItem key={language} item={language} />
+          )}
+        </ul>
+      </div>
     </div>
   )
 }
@@ -22,9 +31,9 @@ const CountryList = ({ countries }) => {
   return (
     <ul>
       {countries.map((country) =>
-        <CountryName
+        <ListItem
           key={country.name.common}
-          country={country}
+          item={country.name.common}
         />
       )}
     </ul>
