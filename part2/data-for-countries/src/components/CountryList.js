@@ -1,5 +1,4 @@
 const Country = ({ country }) => {
-  console.log(country)
   return (
     <li>
       {country.name.common} 
@@ -11,7 +10,7 @@ const CountryList = ({ countries }) => {
     <ul>
       {countries.map((country) =>
         <Country
-          key={country.id}
+          key={country.name.common}
           country={country}
         />
       )}
