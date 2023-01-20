@@ -14,11 +14,6 @@ function App() {
         setCountries(response)
       })
   }, [])
-  if (countries.length > 0) {
-    const country = countries[173]
-    console.log(Object.values(country.languages))
-    console.log(typeof(country.languages))
-  }
 
   const getCountriesToShow = () => {
     if (search.length > 0) {

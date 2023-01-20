@@ -6,6 +6,28 @@ const ListItem = ({ item }) => {
   )
 }
 
+const CountryList = ({ countries }) => {
+  return (
+    <ul>
+      {countries.map((country) =>
+        <ListItem
+          key={country.name.common}
+          item={country.name.common}
+        />
+      )}
+    </ul>
+  )
+}
+
+const Image = ({ image }) => {
+  return (
+    <div>
+      <img src={image} />
+    </div>
+  )
+}
+
+
 const CountryInfo = ({ country }) => {
   return (
     <div>
@@ -23,20 +45,8 @@ const CountryInfo = ({ country }) => {
           )}
         </ul>
       </div>
+      <Image image={country.flags["png"]} />
     </div>
-  )
-}
-
-const CountryList = ({ countries }) => {
-  return (
-    <ul>
-      {countries.map((country) =>
-        <ListItem
-          key={country.name.common}
-          item={country.name.common}
-        />
-      )}
-    </ul>
   )
 }
 
