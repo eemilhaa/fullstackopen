@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import countryService from "./services/countries"
+import CountryList from "./components/CountryList"
 
 function App() {
   const [countries, setCountries] = useState([])
@@ -11,10 +12,11 @@ function App() {
         setCountries(response)
       })
   }, [])
-  console.log(countries)
-
   return (
-    <h1>Country search</h1>
+    <div>
+      <h1>Country search</h1>
+      <CountryList countries={countries}/>
+    </div>
   );
 }
 
