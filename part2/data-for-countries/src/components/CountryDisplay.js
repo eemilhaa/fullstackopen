@@ -51,6 +51,12 @@ const CountryInfo = ({ country }) => {
 }
 
 const CountryDisplay = ({ countries }) => {
+  if (countries.length > 10) {
+    return (
+      <b>Too many matches, continue typing</b>
+    )
+    
+  }
   if (countries.length === 1) {
     const country = countries[0]
     return (
