@@ -59,11 +59,16 @@ const App = () => {
       }
       return;
     }
-    personService.create(personObject).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
-    });
-    notify(`${newName} added`, true);
-  };
+    personService
+      .create(personObject)
+      .then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        notify(`${newName} added`, true);
+      })
+      .catch(error => {
+        notify(`${error.response.data.error}`, false);
+      })
+  }
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
