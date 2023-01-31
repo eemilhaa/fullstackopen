@@ -92,6 +92,28 @@ describe("DELETE", () => {
   })
 })
 
+describe("PUT", () => {
+  test("updating likes increases likes", async () => {
+    const allBlogs = await helper.getAllBlogs()
+    const blogToUpdate = allBlogs[0]
+    const likesAtStart = blogToUpdate.likes
+    const newBlog = {
+      title: blogToUpdate.title,
+      author: blogToUpdate.author,
+      url: blogToUpdate.url,
+      likes: likesAtStart + 10,
+    }
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(newBlog)
+    const result = await api.get(`/api/blogs/${blogToUpdate.id}`)
+    console.log(result)
+    expect(result.body.likes).toBe(
+      blogToUpdate.likes + 10
+    )
+  })
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
