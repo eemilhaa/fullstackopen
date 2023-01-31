@@ -30,7 +30,7 @@ describe("GET", () => {
   })
 })
 
-describe("POST", () =>{
+describe("POST", () => {
   test("a valid blog can be added ", async () => {
     const newBlog = {
       title: "async/await simplifies making async calls",
@@ -44,8 +44,8 @@ describe("POST", () =>{
       .expect(201)
       .expect("Content-Type", /application\/json/)
     const response = await helper.getAllBlogs()
-    const titles = response.body.map(r => r.title)
-    expect(response.body).toHaveLength(helper.blogs.length + 1)
+    const titles = response.map(r => r.title)
+    expect(response).toHaveLength(helper.blogs.length + 1)
     expect(titles).toContain(
       "async/await simplifies making async calls"
     )
