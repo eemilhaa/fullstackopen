@@ -34,25 +34,23 @@ describe("GET", () => {
 })
 
 describe("POST", () =>{
-  test('a valid blog can be added ', async () => {
+  test("a valid blog can be added ", async () => {
     const newBlog = {
-      title: 'async/await simplifies making async calls',
+      title: "async/await simplifies making async calls",
       author: "A. Uthor",
       url: "asdf",
       likes: 5
     }
-
     await api
-      .post('/api/blogs')
+      .post("/api/blogs")
       .send(newBlog)
       .expect(201)
-      .expect('Content-Type', /application\/json/)
-
-    const response = await api.get('/api/blogs')
+      .expect("Content-Type", /application\/json/)
+    const response = await api.get("/api/blogs")
     const titles = response.body.map(r => r.title)
     expect(response.body).toHaveLength(2 + 1)
     expect(titles).toContain(
-      'async/await simplifies making async calls'
+      "async/await simplifies making async calls"
     )
   })
 })
