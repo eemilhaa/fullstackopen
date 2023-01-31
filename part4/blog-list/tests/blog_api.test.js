@@ -53,6 +53,18 @@ describe("POST", () =>{
       "async/await simplifies making async calls"
     )
   })
+
+  test.only("a blog added without likes gets 0 likes", async () => {
+    const newBlog = {
+      title: "unlikable blog",
+      author: "A. U. Thor",
+      url: "hjkl",
+    }
+    const result = await api
+      .post("/api/blogs")
+      .send(newBlog)
+    expect(result.body.likes).toBe(0)
+  })
 })
 
 afterAll(async () => {
