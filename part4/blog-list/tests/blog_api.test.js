@@ -7,10 +7,7 @@ const helper = require("./test_helper")
 
 beforeEach(async () => {
   await Blog.deleteMany({})
-  let blogObject = new Blog(helper.blogs[0])
-  await blogObject.save()
-  blogObject = new Blog(helper.blogs[1])
-  await blogObject.save()
+  await Blog.insertMany(helper.blogs)
 })
 
 describe("GET", () => {
@@ -23,7 +20,7 @@ describe("GET", () => {
 
   test("correct number of blogs returned", async () => {
     const response = await api.get("/api/blogs")
-    expect(response.body).toHaveLength(2)
+    expect(response.body).toHaveLength(helper.blogs.length)
   })
 
   test("id field defined", async () => {
@@ -48,7 +45,7 @@ describe("POST", () =>{
       .expect("Content-Type", /application\/json/)
     const response = await api.get("/api/blogs")
     const titles = response.body.map(r => r.title)
-    expect(response.body).toHaveLength(2 + 1)
+    expect(response.body).toHaveLength(helper.blogs.length + 1)
     expect(titles).toContain(
       "async/await simplifies making async calls"
     )
