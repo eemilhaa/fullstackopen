@@ -3,13 +3,13 @@ const supertest = require("supertest")
 const app = require("../app")
 const api = supertest(app)
 const Blog = require("../models/blog")
-const blogs = require("./test_data")
+const helper = require("./test_helper")
 
 beforeEach(async () => {
   await Blog.deleteMany({})
-  let blogObject = new Blog(blogs[0])
+  let blogObject = new Blog(helper.blogs[0])
   await blogObject.save()
-  blogObject = new Blog(blogs[1])
+  blogObject = new Blog(helper.blogs[1])
   await blogObject.save()
 })
 
@@ -54,7 +54,7 @@ describe("POST", () =>{
     )
   })
 
-  test.only("a blog added without likes gets 0 likes", async () => {
+  test("a blog added without likes gets 0 likes", async () => {
     const newBlog = {
       title: "unlikable blog",
       author: "A. U. Thor",
