@@ -62,6 +62,18 @@ describe("POST", () => {
       .send(newBlog)
     expect(result.body.likes).toBe(0)
   })
+
+  test('fails with status code 400 if data invalid', async () => {
+    const newBlog = {
+      author: "Uolevi"
+    }
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+    const blogsAtEnd = await helper.getAllBlogs()
+    expect(blogsAtEnd).toHaveLength(helper.blogs.length)
+  })
 })
 
 afterAll(async () => {
