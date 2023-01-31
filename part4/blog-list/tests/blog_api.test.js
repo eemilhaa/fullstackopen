@@ -43,7 +43,7 @@ describe("POST", () =>{
       .send(newBlog)
       .expect(201)
       .expect("Content-Type", /application\/json/)
-    const response = await api.get("/api/blogs")
+    const response = await helper.getAllBlogs()
     const titles = response.body.map(r => r.title)
     expect(response.body).toHaveLength(helper.blogs.length + 1)
     expect(titles).toContain(
