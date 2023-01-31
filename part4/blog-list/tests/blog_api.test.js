@@ -25,6 +25,12 @@ describe("GET", () => {
     const response = await api.get("/api/blogs")
     expect(response.body).toHaveLength(2)
   })
+
+  test("id field defined", async () => {
+    const response = await api.get("/api/blogs")
+    const blog = response.body[0]
+    expect(blog.id).toBeDefined()
+  })
 })
 
 afterAll(async () => {
