@@ -107,7 +107,6 @@ describe("PUT", () => {
       .put(`/api/blogs/${blogToUpdate.id}`)
       .send(newBlog)
     const result = await api.get(`/api/blogs/${blogToUpdate.id}`)
-    console.log(result)
     expect(result.body.likes).toBe(
       blogToUpdate.likes + 10
     )
