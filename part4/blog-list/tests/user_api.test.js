@@ -98,7 +98,7 @@ describe("when there is initially one user at db", () => {
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 
-  test("creation fails with proper statuscode and message if username too short", async () => {
+  test("creation fails with proper statuscode and message if password too short", async () => {
     const usersAtStart = await helper.getAllUsers()
     const newUser = {
       username: "asdf",
