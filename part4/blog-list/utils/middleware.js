@@ -5,6 +5,8 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).json({ error: error.message })
   } else if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" })
+  } else if (error.name === "TypeError") {
+    return response.status(400).send({ error: error.message })
   } else {
     logger.error(error)
   }
