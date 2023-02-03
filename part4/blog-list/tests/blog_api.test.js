@@ -40,6 +40,7 @@ describe("POST", () => {
       likes: 5,
       user: userId
     }
+    console.log(newBlog)
     await api
       .post("/api/blogs")
       .send(newBlog)
