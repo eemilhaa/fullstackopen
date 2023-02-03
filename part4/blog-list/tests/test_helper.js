@@ -62,8 +62,14 @@ const getAllUsers = async () => {
   return users.map(u => u.toJSON())
 }
 
+const getFirstUserId = async () => {
+  const users = await getAllUsers()
+  return users[0].id
+}
+
 module.exports = {
   blogs,
   getAllBlogs,
-  getAllUsers
+  getAllUsers,
+  getFirstUserId,
 }

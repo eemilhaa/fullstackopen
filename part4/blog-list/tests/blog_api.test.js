@@ -32,11 +32,13 @@ describe("GET", () => {
 
 describe("POST", () => {
   test("a valid blog can be added ", async () => {
+    const userId = await helper.getFirstUserId()
     const newBlog = {
       title: "async/await simplifies making async calls",
       author: "A. Uthor",
       url: "asdf",
-      likes: 5
+      likes: 5,
+      user: userId
     }
     await api
       .post("/api/blogs")
@@ -52,10 +54,12 @@ describe("POST", () => {
   })
 
   test("a blog added without likes gets 0 likes", async () => {
+    const userId = await helper.getFirstUserId()
     const newBlog = {
       title: "unlikable blog",
       author: "A. U. Thor",
       url: "hjkl",
+      user: userId
     }
     const result = await api
       .post("/api/blogs")
@@ -98,9 +102,6 @@ describe("PUT", () => {
     const blogToUpdate = allBlogs[0]
     const likesAtStart = blogToUpdate.likes
     const newBlog = {
-      title: blogToUpdate.title,
-      author: blogToUpdate.author,
-      url: blogToUpdate.url,
       likes: likesAtStart + 10,
     }
     await api
