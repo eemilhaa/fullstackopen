@@ -1,5 +1,14 @@
 const logger = require("../utils/logger")
 
+const tokenExtractor = (request, response, next) => {
+  const auth = request.get("authorization")
+  if (auth && auth.startsWith("Bearer ")) {
+    const token = auth.replace("Bearer ", "")
+    request.token = token
+  }
+  next()
+}
+
 const errorHandler = (error, request, response, next) => {
   if (error.name === "ValidationError") {
     return response.status(400).json({ error: error.message })
@@ -15,4 +24,4 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-module.exports = { errorHandler }
+module.exports = { errorHandler, tokenExtractor }
