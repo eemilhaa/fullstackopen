@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Blog from "./components/Blog"
 import Login from "./components/Login"
 import Title from "./components/Title"
+import UserInfo from "./components/UserInfo"
 import blogService from "./services/blogs"
 import loginService from "./services/login"
 
@@ -34,20 +35,27 @@ const App = () => {
 
   const handleUsernameChange = ({ target }) => setUsername(target.value)
   const handlePasswordChange = ({ target }) => setPassword(target.value)
-  
+
   return (
     <div>
-      <Title title={user ? "Blogs" : "Login"}/>
-      {!user && <Login
-        username={username}
-        password={password}
-        handlePasswordChange={handlePasswordChange}
-        handleUsernameChange={handleUsernameChange}
-        handleLogin={handleLogin}
-      />}
-      {user && blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      <Title title={user ? "Blogs" : "Log in to application"}/>
+      {!user &&
+        <Login
+          username={username}
+          password={password}
+          handlePasswordChange={handlePasswordChange}
+          handleUsernameChange={handleUsernameChange}
+          handleLogin={handleLogin}
+        />
+      }
+      {user &&
+        <div>
+        <UserInfo user={user} />
+        {blogs.map(blog =>
+          <Blog key={blog.id} blog={blog} />
+        )}
+        </div>
+      }
     </div>
   )
 }
