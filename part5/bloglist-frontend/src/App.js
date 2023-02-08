@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import Blog from "./components/Blog"
+import Login from "./components/Login"
 import blogService from "./services/blogs"
 
 const App = () => {
@@ -18,6 +19,9 @@ const App = () => {
     console.log('logging in with', username, password)
   }
 
+  const handleUsernameChange = ({ target }) => setUsername(target.value)
+  const handlePasswordChange = ({ target }) => setPassword(target.value)
+  
   return (
     <div>
       <h2>blogs</h2>
@@ -25,27 +29,13 @@ const App = () => {
         <Blog key={blog.id} blog={blog} />
       )}
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-            <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-            />
-        </div>
-        <div>
-          password
-            <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-            />
-        </div>
-        <button type="submit">login</button>
-      </form>
+        <Login
+          username={username}
+          password={password}
+          handlePasswordChange={handlePasswordChange}
+          handleUsernameChange={handleUsernameChange}
+          handleLogin={handleLogin}
+        />
     </div>
   )
 }
