@@ -3,6 +3,7 @@ import Blog from "./components/Blog"
 import Login from "./components/Login"
 import Title from "./components/Title"
 import UserInfo from "./components/UserInfo"
+import BlogForm from "./components/BlogForm"
 import blogService from "./services/blogs"
 import loginService from "./services/login"
 
@@ -67,6 +68,8 @@ const App = () => {
       {user &&
         <div>
         <UserInfo user={user} handleLogout={handleLogout} />
+        <Title title="Create a new blog" />
+        <BlogForm blogs={blogs} setBlogs={setBlogs} />
         {blogs.map(blog =>
           <Blog key={blog.id} blog={blog} />
         )}
