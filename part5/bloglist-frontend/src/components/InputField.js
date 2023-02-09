@@ -1,12 +1,12 @@
-const InputField = ({ text, value, handleChange }) => {
+const InputField = ({ prompt, type, value, name, handleChange }) => {
   return (
     <div>
-      {text}
+      {prompt}
         <input
-        type="text"
-        value={value}
-        name="title"
-        onChange={handleChange}
+          type={type}
+          value={value}
+          name={name}
+          onChange={handleChange}
         />
     </div>
   )

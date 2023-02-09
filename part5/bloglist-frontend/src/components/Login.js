@@ -1,4 +1,5 @@
 import { useState } from "react"
+import InputField from "./InputField"
 
 
 const Login = ({ loginService, blogService, setUser }) => {
@@ -27,24 +28,20 @@ const Login = ({ loginService, blogService, setUser }) => {
 
   return (
     <form onSubmit={handleLogin}>
-      <div>
-        username
-          <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={handleUsernameChange}
-          />
-      </div>
-      <div>
-        password
-          <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={handlePasswordChange}
-          />
-      </div>
+      <InputField
+        prompt="username"
+        type="text"
+        value={username}
+        name="Username"
+        handleChange={handleUsernameChange}
+      />
+      <InputField
+        prompt="password"
+        type="password"
+        value={password}
+        name="Password"
+        handleChange={handlePasswordChange}
+      />
       <button type="submit">login</button>
     </form>
   )

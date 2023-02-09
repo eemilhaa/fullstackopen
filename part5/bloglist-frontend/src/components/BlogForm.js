@@ -28,18 +28,24 @@ const BlogForm = ({ blogs, setBlogs }) => {
   return (
     <form onSubmit={handleBlogPost}>
       <InputField
-        text={"title"}
+        prompt="title"
+        type="text"
         value={title}
+        name="title"
         handleChange={handleTitleChange}
       />
       <InputField
-        text={"author"}
+        prompt="author"
+        type="text"
         value={author}
+        name="author"
         handleChange={handleAuthorChange}
       />
       <InputField
-        text={"url"}
+        prompt="url"
+        type="text"
         value={url}
+        name="url"
         handleChange={handleUrlChange}
       />
       <button type="submit">create</button>
