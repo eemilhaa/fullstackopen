@@ -4,12 +4,14 @@ import Login from "./components/Login"
 import Title from "./components/Title"
 import UserInfo from "./components/UserInfo"
 import BlogForm from "./components/BlogForm"
+import Notification from "./components/Notification"
 import blogService from "./services/blogs"
 import loginService from "./services/login"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -29,6 +31,7 @@ const App = () => {
   return (
     <div>
       <Title title={user ? "Blogs" : "Log in to application"}/>
+      <Notification message={notification} setMessage={setNotification}/>
       {!user &&
         <Login
           loginService={loginService}
@@ -40,7 +43,7 @@ const App = () => {
         <div>
         <UserInfo user={user} setUser={setUser} />
         <Title title="Create a new blog" />
-        <BlogForm blogs={blogs} setBlogs={setBlogs} />
+        <BlogForm blogs={blogs} setBlogs={setBlogs} setNotification={setNotification} />
         {blogs.map(blog =>
           <Blog key={blog.id} blog={blog} />
         )}

@@ -2,7 +2,7 @@ import { useState } from "react"
 import blogService from "../services/blogs"
 import InputField from "./InputField"
 
-const BlogForm = ({ blogs, setBlogs }) => {
+const BlogForm = ({ blogs, setBlogs, setNotification }) => {
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [url, setUrl] = useState("")
@@ -23,6 +23,7 @@ const BlogForm = ({ blogs, setBlogs }) => {
     setTitle("")
     setAuthor("")
     setUrl("")
+    setNotification(`a new blog ${title} added`)
   }
 
   return (
