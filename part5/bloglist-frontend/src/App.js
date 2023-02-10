@@ -31,12 +31,13 @@ const App = () => {
   return (
     <div>
       <Title title={user ? "Blogs" : "Log in to application"}/>
-      <Notification message={notification} setMessage={setNotification}/>
+      <Notification notification={notification} setNotification={setNotification}/>
       {!user &&
         <Login
           loginService={loginService}
           blogService={blogService}
           setUser={setUser}
+          setNotification={setNotification}
         />
       }
       {user &&

@@ -1,18 +1,19 @@
 import { useEffect } from "react"
 
-const Notification = ({ message, setMessage }) => {
+const Notification = ({ notification, setNotification }) => {
+
   useEffect(() => {
     const timeout = setTimeout(() => {
-      console.log("notif to null")
-      setMessage(null)
+      console.log(notification)
+      setNotification(null)
     }, 3000);
     return () => clearTimeout(timeout)
-  }, [message, setMessage])
+  }, [notification, setNotification])
 
-  if (!message) {
+  if (!notification) {
     return null
   }
-  return <div> {message} </div>
+  return <p> {notification} </p>
 }
 
 export default Notification

@@ -2,7 +2,7 @@ import { useState } from "react"
 import InputField from "./InputField"
 
 
-const Login = ({ loginService, blogService, setUser }) => {
+const Login = ({ loginService, blogService, setUser, setNotification }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -19,7 +19,7 @@ const Login = ({ loginService, blogService, setUser }) => {
       setUsername("")
       setPassword("")
     } catch (exception) {
-      console.log("error")
+      setNotification("Wrong username or password")
     }
   }
 
