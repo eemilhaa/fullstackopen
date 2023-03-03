@@ -5,6 +5,7 @@ import Title from "./components/Title"
 import UserInfo from "./components/UserInfo"
 import BlogForm from "./components/BlogForm"
 import Notification from "./components/Notification"
+import Togglable from "./components/Togglable"
 import blogService from "./services/blogs"
 import loginService from "./services/login"
 
@@ -44,7 +45,13 @@ const App = () => {
         <div>
         <UserInfo user={user} setUser={setUser} />
         <Title title="Create a new blog" />
-        <BlogForm blogs={blogs} setBlogs={setBlogs} setNotification={setNotification} />
+        <Togglable buttonLabel="new blog">
+          <BlogForm
+            blogs={blogs}
+            setBlogs={setBlogs}
+            setNotification={setNotification}
+          />
+        </Togglable>
         {blogs.map(blog =>
           <Blog key={blog.id} blog={blog} />
         )}
