@@ -1,10 +1,16 @@
 import { useState } from "react"
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, blogService, blogs, setBlogs }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const toggleShowDetails = () => {
     setShowDetails(!showDetails)
+  }
+
+  const handleLike = async () => {
+    const blogObject = {...blog, user: blog.user.id, likes: blog.likes + 1}
+    const retrurnedBlog = await blogService.update(blogObject)
+    setBlogs(blogs.map(blog => blog.id === blogObject.id ? retrurnedBlog : blog))
   }
 
   const blogStyle = {
@@ -24,7 +30,7 @@ const Blog = ({ blog }) => {
           <br/>
           {blog.url} <br/>
           {blog.likes}
-          <button onClick={() => console.log("like")}>like</button>
+          <button onClick={handleLike}>like</button>
           <br/>
           {blog.author} <br/>
         </div>
