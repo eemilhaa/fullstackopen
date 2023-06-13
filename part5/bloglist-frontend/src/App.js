@@ -56,6 +56,7 @@ const App = () => {
           blogs={blogs}
           blogService={blogService}
           setBlogs={setBlogs}
+          user={user}
         />
         </div>
       }
