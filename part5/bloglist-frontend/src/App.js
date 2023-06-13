@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import Blog from "./components/Blog"
 import Login from "./components/Login"
 import Title from "./components/Title"
 import UserInfo from "./components/UserInfo"
 import BlogForm from "./components/BlogForm"
+import BlogList from "./components/BlogList"
 import Notification from "./components/Notification"
 import Togglable from "./components/Togglable"
 import blogService from "./services/blogs"
@@ -52,15 +52,11 @@ const App = () => {
             setNotification={setNotification}
           />
         </Togglable>
-        {blogs.map(blog =>
-          <Blog
-            key={blog.id}
-            blog={blog}
-            blogService={blogService}
-            blogs={blogs}
-            setBlogs={setBlogs}
-          />
-        )}
+        <BlogList
+          blogs={blogs}
+          blogService={blogService}
+          setBlogs={setBlogs}
+        />
         </div>
       }
     </div>
