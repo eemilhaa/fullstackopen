@@ -3,6 +3,10 @@ import { useState } from "react"
 const Blog = ({ blog, blogService, blogs, setBlogs, user }) => {
   const [showDetails, setShowDetails] = useState(false)
 
+  if (!blog.likes) {
+    blog.likes = 0
+  }
+
   const deletable = blog.user.id === user.id || blog.user === user.id
   
   const toggleShowDetails = () => {
@@ -39,7 +43,8 @@ const Blog = ({ blog, blogService, blogs, setBlogs, user }) => {
           {blog.title}
           <button onClick={toggleShowDetails}>hide</button>
           <br/>
-          {blog.url} <br/>
+          {blog.url}
+          <br/>
           {blog.likes}
           <button onClick={handleLike}>like</button>
           <br/>
