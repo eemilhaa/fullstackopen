@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Login from "./components/Login"
 import Title from "./components/Title"
 import UserInfo from "./components/UserInfo"
@@ -13,6 +13,7 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState(null)
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -45,11 +46,12 @@ const App = () => {
         <div>
         <UserInfo user={user} setUser={setUser} />
         <Title title="Create a new blog" />
-        <Togglable buttonLabel="new blog">
+        <Togglable buttonLabel="new blog" ref={blogFormRef}>
           <BlogForm
             blogs={blogs}
             setBlogs={setBlogs}
             setNotification={setNotification}
+            ref={blogFormRef}
           />
         </Togglable>
         <BlogList

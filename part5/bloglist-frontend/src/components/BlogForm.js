@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useState, forwardRef } from "react"
 import blogService from "../services/blogs"
 import InputField from "./InputField"
 
-const BlogForm = ({ blogs, setBlogs, setNotification }) => {
+const BlogForm = forwardRef(({ blogs, setBlogs, setNotification }, ref) => {
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [url, setUrl] = useState("")
@@ -12,6 +12,7 @@ const BlogForm = ({ blogs, setBlogs, setNotification }) => {
   const handleUrlChange = ({ target }) => setUrl(target.value)
 
   const handleBlogPost = async (event) => {
+    ref.current.toggleVisibility()
     event.preventDefault()
     const blogObject = {
       title: title,
@@ -52,6 +53,6 @@ const BlogForm = ({ blogs, setBlogs, setNotification }) => {
       <button type="submit">create</button>
     </form>
   )
-}
+})
 
 export default BlogForm
