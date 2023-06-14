@@ -36,5 +36,4 @@ const update = async (newObject) => {
   return response.data
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default { setToken, getAll, create, deleteBlog, update }

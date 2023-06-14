@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -44,22 +44,22 @@ const App = () => {
       }
       {user &&
         <div>
-        <UserInfo user={user} setUser={setUser} />
-        <Title title="Create a new blog" />
-        <Togglable buttonLabel="new blog" ref={blogFormRef}>
-          <BlogForm
+          <UserInfo user={user} setUser={setUser} />
+          <Title title="Create a new blog" />
+          <Togglable buttonLabel="new blog" ref={blogFormRef}>
+            <BlogForm
+              blogs={blogs}
+              setBlogs={setBlogs}
+              setNotification={setNotification}
+              ref={blogFormRef}
+            />
+          </Togglable>
+          <BlogList
             blogs={blogs}
+            blogService={blogService}
             setBlogs={setBlogs}
-            setNotification={setNotification}
-            ref={blogFormRef}
+            user={user}
           />
-        </Togglable>
-        <BlogList
-          blogs={blogs}
-          blogService={blogService}
-          setBlogs={setBlogs}
-          user={user}
-        />
         </div>
       }
     </div>

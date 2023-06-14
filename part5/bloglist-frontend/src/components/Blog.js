@@ -8,13 +8,13 @@ const Blog = ({ blog, blogService, blogs, setBlogs, user }) => {
   }
 
   const deletable = blog.user.id === user.id || blog.user === user.id
-  
+
   const toggleShowDetails = () => {
     setShowDetails(!showDetails)
   }
 
   const handleLike = async () => {
-    const blogObject = {...blog, user: blog.user.id, likes: blog.likes + 1}
+    const blogObject = { ...blog, user: blog.user.id, likes: blog.likes + 1 }
     const retrurnedBlog = await blogService.update(blogObject)
     setBlogs(blogs.map(blog => blog.id === blogObject.id ? retrurnedBlog : blog))
   }
@@ -30,7 +30,7 @@ const Blog = ({ blog, blogService, blogs, setBlogs, user }) => {
 
   const blogStyle = {
     padding: 10,
-    border: 'solid',
+    border: "solid",
     borderWidth: 1,
     borderColor: "lightgray",
     marginBottom: 5

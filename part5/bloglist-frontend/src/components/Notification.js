@@ -6,7 +6,7 @@ const Notification = ({ notification, setNotification }) => {
     const timeout = setTimeout(() => {
       console.log(notification)
       setNotification(null)
-    }, 3000);
+    }, 3000)
     return () => clearTimeout(timeout)
   }, [notification, setNotification])
 

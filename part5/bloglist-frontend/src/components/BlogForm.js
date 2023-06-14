@@ -62,4 +62,6 @@ BlogForm.propTypes = {
   setNotification: PropTypes.func.isRequired,
 }
 
+BlogForm.displayName = "BlogForm"
+
 export default BlogForm
