@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import { useState, forwardRef } from "react"
 import blogService from "../services/blogs"
 import InputField from "./InputField"
@@ -54,5 +55,11 @@ const BlogForm = forwardRef(({ blogs, setBlogs, setNotification }, ref) => {
     </form>
   )
 })
+
+BlogForm.propTypes = {
+  blogs: PropTypes.array.isRequired,
+  setBlogs: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
+}
 
 export default BlogForm

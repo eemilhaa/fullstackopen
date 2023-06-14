@@ -19,7 +19,7 @@ const Blog = ({ blog, blogService, blogs, setBlogs, user }) => {
     setBlogs(blogs.map(blog => blog.id === blogObject.id ? retrurnedBlog : blog))
   }
 
-  const handleDelete = async () => {  // TODO
+  const handleDelete = async () => {
     console.log(blog)
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
       const blogToDelete = blog
